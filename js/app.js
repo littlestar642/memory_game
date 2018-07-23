@@ -12,7 +12,7 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 
-var time = 0;
+// this object is use to place the correct value of shufled classes. Also Note the code used for matching similar pairs.
 var putObj = {
     1: "fa fa-diamond",
     3: "fa fa-paper-plane-o",
@@ -31,7 +31,7 @@ var putObj = {
     34: "fa fa-leaf",
     38: "fa fa-bomb"
 };
-
+//  all the Declarations and initializations
 var list = document.querySelectorAll('.deck li');
 var newGame = document.querySelector('#newGame');
 var newGame1 = document.querySelector('#newGame1');
@@ -65,7 +65,7 @@ var interval;
 var starcount;
 var easyMode = false;
 
-
+// The event listeners
 tohard.addEventListener('click', () => {
     modeinfo.classList.remove('hide');
     hardinfo.classList.remove('hide');
@@ -109,6 +109,7 @@ easy.addEventListener('click', () => {
     stars.classList.add('hide');
     time.classList.remove('hide');
     clearInterval(starcount);
+    // function to check time
     interval = setInterval(() => {
         sec.innerHTML = parseInt(sec.innerHTML) + 1;
         if (parseInt(sec.innerHTML) >= 60) {
@@ -131,6 +132,7 @@ hard.addEventListener('click', () => {
     chooseTitle.classList.add('hide');
     start.classList.remove('hide');
     time.classList.remove('hide');
+    mainTitle.classList.add('hide');
     interval = setInterval(() => {
         sec.innerHTML = parseInt(sec.innerHTML) + 1;
         if (parseInt(sec.innerHTML) >= 60) {
@@ -158,7 +160,7 @@ newGame1.addEventListener('click', () => {
 });
 
 
-
+//  Main shuffling algorithm
 function shuffle(array) {
     var currentIndex = array.length,
         temporaryValue, randomIndex;
@@ -173,18 +175,14 @@ function shuffle(array) {
 
     return array;
 }
-
-// restart.addEventListener('click', () => {
-//     clearInterval(interval);
-//     clearInterval(starcount);
-//     restart();
-// });
+// function to create stars
 var createStar = () => {
     var i = document.createElement('i');
     i.classList.add('fa');
     i.classList.add('fa-star');
     stars.appendChild(i);
 }
+//  function to restart the Game again
 var restart = function () {
     gameOver.classList.add('hide');
     easy.classList.remove('hide');
@@ -195,21 +193,20 @@ var restart = function () {
     var frg = document.createDocumentFragment();
     var array = [1, 3, 5, 7, 11, 13, 17, 19, 2, 6, 10, 14, 22, 26, 34, 38];
     array = shuffle(array);
-    for (var i = 0; i < 8; i++) createStar();
-    console.log(array);
+    for (var i = 0; i < 9; i++) createStar();
     list.forEach((node, i) => {
         node.firstElementChild.className = putObj[array[i]];
         node.setAttribute('data-val', array[i]);
         node.classList.remove('open');
         node.classList.remove('match');
         node.classList.remove('show');
-        console.log(node);
     });
     starcount = setInterval(() => {
         if (stars.childElementCount === 0) {
             gameOver.classList.remove('hide');
             deck.classList.add('hide');
             scorePanel.classList.add('hide');
+            modeinfo.classList.add('hide');
             return;
         };
     }, 100);
@@ -218,6 +215,7 @@ var restart = function () {
 }
 window.onload = restart;
 
+//  Main listener that checks for cards match and mis-match
 deck.addEventListener('click', (e) => {
 
     if (memArr.length == 2) return;
@@ -265,7 +263,7 @@ deck.addEventListener('click', (e) => {
                 endShow.classList.remove('hide');
             };
         }, 500);
-}
+    }
 
 
 

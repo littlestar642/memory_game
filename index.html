@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/app.css" media="screen and (min-width:501px)">
+    <link rel="stylesheet" href="css/smallScreen.css" media="screen and (max-width:500px)">
 </head>
 
 <body>
@@ -23,7 +24,8 @@
             <button type="button" id="tohard">Hard Mode</button>
         </div>
         <div class="gameOver hide">
-            <p>GAME OVER</p>
+            <h1>GAME OVER</h1>
+            <h2>You could not finish the game in given restrictions. Try Again!</h2>
             <button type="button" id="newGame">New Game</button>
         </div>
         <div class="modeInfo hide text-center">
@@ -37,26 +39,26 @@
             <div class="hardInfo hide">
                 <ul>
                     <li>You have 1 minute to finish the Game.</li>
-                    <li>You will have infinite moves and 8 chances to make correct matches.</li>
+                    <li>You will have infinite moves and 9 chances to make correct matches.</li>
                 </ul>
                 <button id="hard">Start Game</button>
             </div>
             <div class="timeInfo hide">
                 <ul>
                     <li>You have unlimited time to finish the Game.</li>
-                    <li>You will have infinite moves and 8 chances to make correct matches.</li>
+                    <li>You will have infinite moves and 9 chances to make correct matches.</li>
                 </ul>
                 <button id="noTime">Start Game</button>
             </div>
         </div>
 
         <section class="score-panel hide">
-            
+
             <ul id="stars">
-                    Moves Remaining-:
-            </ul> 
-                <span class="countSec time hide">1</span> 
-            
+                Wrong Moves Remaining -:
+            </ul>
+            <span class="countSec time hide">1</span>
+
             <span class="moves">0</span> Moves
         </section>
 
@@ -113,6 +115,9 @@
         <div class="endShow hide text-center">
             <h1>Congratulations!!</h1>
             <h2>You Won!</h2>
+            <h3>You took in total
+                <span class="moves"></span> moves and
+                <span class="countSec time"></span> secs</h3>
             <button type="button" id="newGame1">New Game</button>
         </div>
     </div>
