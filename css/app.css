@@ -60,12 +60,13 @@ body {
 #easy,
 #hard,
 #noTime,
-#newGame {
+#newGame,#toeasy,#tohard {
     margin: 5px;
     border-radius: 10px;
     background: white;
     border-color: black;
     height: 40px;
+    cursor: pointer;
 }
 #tonoTime,
 #easy,
@@ -285,6 +286,18 @@ h1 {
     margin:10px;
 }
 
+#restart{
+    background: #02ccba;
+    border-radius: 5px;
+    height:30px;
+    border:none;
+    width:100px;
+    float: right;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+
+}
 .score-panel .stars {
     margin: 0;
     padding: 0;

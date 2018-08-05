@@ -2,10 +2,15 @@
 
 ## Table of Contents
 
+* [Technologies](#Technologies)
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
-##GamePlay Instructions
+## Technologies
+
+### This project is mostly built using vanilla javascript and I have not used any other frontend framework. For modal I have used [`sweetalert.js`](https://sweetalert2.github.io/#download) .
+
+## GamePlay Instructions
 
 The game has 3 modes in total.
 1. Timeless Mode

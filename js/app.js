@@ -47,7 +47,7 @@ var hard = document.querySelector('#hard');
 var scorePanel = document.querySelector('.score-panel');
 var deck = document.querySelector('.deck');
 var chooseTitle = document.querySelector('.choose-title');
-var stars = document.querySelector('#stars');
+var cogs = document.querySelector('#cogs');
 var gameOver = document.querySelector('.gameOver');
 var time = document.querySelector('.time');
 var sec = document.querySelector('.countSec');
@@ -106,7 +106,7 @@ easy.addEventListener('click', () => {
     scorePanel.classList.remove('hide');
     deck.classList.remove('hide');
     chooseTitle.classList.add('hide');
-    stars.classList.add('hide');
+    cogs.classList.add('hide');
     time.classList.remove('hide');
     clearInterval(starcount);
     // function to check time
@@ -116,6 +116,7 @@ easy.addEventListener('click', () => {
             gameOver.classList.remove('hide');
             deck.classList.add('hide');
             scorePanel.classList.add('hide');
+            modeinfo.classList.add('hide');
             return;
         }
     }, 1000);
@@ -130,7 +131,6 @@ hard.addEventListener('click', () => {
     scorePanel.classList.remove('hide');
     deck.classList.remove('hide');
     chooseTitle.classList.add('hide');
-    start.classList.remove('hide');
     time.classList.remove('hide');
     mainTitle.classList.add('hide');
     interval = setInterval(() => {
@@ -139,6 +139,7 @@ hard.addEventListener('click', () => {
             gameOver.classList.remove('hide');
             deck.classList.add('hide');
             scorePanel.classList.add('hide');
+            modeinfo.classList.add('hide');
             return;
         }
     }, 1000);
@@ -153,11 +154,7 @@ newGame.addEventListener('click', () => {
     clearInterval(starcount);
     restart();
 });
-newGame1.addEventListener('click', () => {
-    clearInterval(interval);
-    clearInterval(starcount);
-    restart();
-});
+
 
 
 //  Main shuffling algorithm
@@ -175,12 +172,12 @@ function shuffle(array) {
 
     return array;
 }
-// function to create stars
+// function to create cogs
 var createStar = () => {
     var i = document.createElement('i');
     i.classList.add('fa');
-    i.classList.add('fa-star');
-    stars.appendChild(i);
+    i.classList.add('fa-cog');
+    cogs.appendChild(i);
 }
 //  function to restart the Game again
 var restart = function () {
@@ -190,6 +187,10 @@ var restart = function () {
     noTime.classList.remove('hide');
     modes.classList.remove('hide');
     mainTitle.classList.remove('hide');
+    deck.classList.add('hide');
+    scorePanel.classList.add('hide');
+    clearInterval(interval);
+    clearInterval(starcount);
     var frg = document.createDocumentFragment();
     var array = [1, 3, 5, 7, 11, 13, 17, 19, 2, 6, 10, 14, 22, 26, 34, 38];
     array = shuffle(array);
@@ -202,7 +203,7 @@ var restart = function () {
         node.classList.remove('show');
     });
     starcount = setInterval(() => {
-        if (stars.childElementCount === 0) {
+        if (cogs.childElementCount === 0) {
             gameOver.classList.remove('hide');
             deck.classList.add('hide');
             scorePanel.classList.add('hide');
@@ -240,7 +241,7 @@ deck.addEventListener('click', (e) => {
                     memArr = [];
                 } else {
                     if (!easyMode) {
-                        stars.firstElementChild.remove();
+                        cogs.firstElementChild.remove();
                     }
                     list.forEach(node => {
                         node.classList.remove('show');
@@ -259,8 +260,25 @@ deck.addEventListener('click', (e) => {
                 };
             })
             if (flag == 0) {
+                clearInterval(interval);
+                scorePanel.classList.add('hide');
+                deck.classList.add('hide');
                 modeinfo.classList.add('hide');
-                endShow.classList.remove('hide');
+                let rating=()=>{
+                    if(moves<20)return "3 star";
+                    else if(moves>=20) return "2 star";
+                    else return "1 star";
+                };
+                swal({
+                    title:`Good Job! You are rated ${rating()}`,
+                    text:`You are a serious player. You took ${sec.innerHTML} secs and ${moveSelect.innerHTML} moves.`,
+                    type:"success",
+                    confirmButtonText:"New Game",
+                }).then((conf)=>{
+                    if(conf){
+                        restart();
+                    }
+                });
             };
         }, 500);
     }
