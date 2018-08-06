@@ -13,7 +13,7 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
 
 // this object is use to place the correct value of shufled classes. Also Note the code used for matching similar pairs.
-var putObj = {
+let putObj = {
     1: "fa fa-diamond",
     3: "fa fa-paper-plane-o",
     5: "fa fa-bicycle",
@@ -32,38 +32,38 @@ var putObj = {
     38: "fa fa-bomb"
 };
 //  all the Declarations and initializations
-var list = document.querySelectorAll('.deck li');
-var newGame = document.querySelector('#newGame');
-var newGame1 = document.querySelector('#newGame1');
-var restart = document.querySelector('.restart');
-var memArr = [];
-var moves = 0;
-var moveSelect = document.querySelector('.moves');
+let list = document.querySelectorAll('.deck li');
+let newGame = document.querySelector('#newGame');
+let newGame1 = document.querySelector('#newGame1');
+let restart = document.querySelector('.restart');
+let memArr = [];
+let moves = 0;
+let moveSelect = document.querySelector('.moves');
 
-var modes = document.querySelector('.modes');
-var noTime = document.querySelector('#noTime');
-var easy = document.querySelector('#easy');
-var hard = document.querySelector('#hard');
-var scorePanel = document.querySelector('.score-panel');
-var deck = document.querySelector('.deck');
-var chooseTitle = document.querySelector('.choose-title');
-var cogs = document.querySelector('#cogs');
-var gameOver = document.querySelector('.gameOver');
-var time = document.querySelector('.time');
-var sec = document.querySelector('.countSec');
+let modes = document.querySelector('.modes');
+let noTime = document.querySelector('#noTime');
+let easy = document.querySelector('#easy');
+let hard = document.querySelector('#hard');
+let scorePanel = document.querySelector('.score-panel');
+let deck = document.querySelector('.deck');
+let chooseTitle = document.querySelector('.choose-title');
+let cogs = document.querySelector('#cogs');
+let gameOver = document.querySelector('.gameOver');
+let time = document.querySelector('.time');
+let sec = document.querySelector('.countSec');
 
-var tonoTime = document.querySelector('#tonoTime');
-var toeasy = document.querySelector('#toeasy');
-var tohard = document.querySelector('#tohard');
-var modeinfo = document.querySelector('.modeInfo');
-var easyinfo = document.querySelector('.easyInfo');
-var hardinfo = document.querySelector('.hardInfo');
-var timeinfo = document.querySelector('.timeInfo');
-var mainTitle = document.querySelector('.mainTitle');
-var endShow = document.querySelector('.endShow');
-var interval;
-var starcount;
-var easyMode = false;
+let tonoTime = document.querySelector('#tonoTime');
+let toeasy = document.querySelector('#toeasy');
+let tohard = document.querySelector('#tohard');
+let modeinfo = document.querySelector('.modeInfo');
+let easyinfo = document.querySelector('.easyInfo');
+let hardinfo = document.querySelector('.hardInfo');
+let timeinfo = document.querySelector('.timeInfo');
+let mainTitle = document.querySelector('.mainTitle');
+let endShow = document.querySelector('.endShow');
+let interval;
+let starcount;
+let easyMode = false;
 
 // The event listeners
 tohard.addEventListener('click', () => {
@@ -133,6 +133,7 @@ hard.addEventListener('click', () => {
     chooseTitle.classList.add('hide');
     time.classList.remove('hide');
     mainTitle.classList.add('hide');
+    cogs.classList.remove('hide');
     interval = setInterval(() => {
         sec.innerHTML = parseInt(sec.innerHTML) + 1;
         if (parseInt(sec.innerHTML) >= 60) {
@@ -159,7 +160,7 @@ newGame.addEventListener('click', () => {
 
 //  Main shuffling algorithm
 function shuffle(array) {
-    var currentIndex = array.length,
+    let currentIndex = array.length,
         temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -173,14 +174,14 @@ function shuffle(array) {
     return array;
 }
 // function to create cogs
-var createStar = () => {
-    var i = document.createElement('i');
+let createStar = () => {
+    let i = document.createElement('i');
     i.classList.add('fa');
     i.classList.add('fa-cog');
     cogs.appendChild(i);
 }
 //  function to restart the Game again
-var restart = function () {
+let restart = function () {
     gameOver.classList.add('hide');
     easy.classList.remove('hide');
     hard.classList.remove('hide');
@@ -191,10 +192,10 @@ var restart = function () {
     scorePanel.classList.add('hide');
     clearInterval(interval);
     clearInterval(starcount);
-    var frg = document.createDocumentFragment();
-    var array = [1, 3, 5, 7, 11, 13, 17, 19, 2, 6, 10, 14, 22, 26, 34, 38];
+    let frg = document.createDocumentFragment();
+    let array = [1, 3, 5, 7, 11, 13, 17, 19, 2, 6, 10, 14, 22, 26, 34, 38];
     array = shuffle(array);
-    for (var i = 0; i < 9; i++) createStar();
+    for (let i = 0; i < 9; i++) createStar();
     list.forEach((node, i) => {
         node.firstElementChild.className = putObj[array[i]];
         node.setAttribute('data-val', array[i]);
@@ -228,7 +229,6 @@ deck.addEventListener('click', (e) => {
             moveSelect.innerHTML = ++moves;
             setTimeout(() => {
                 if (memArr[0] == 2 * memArr[1] || 2 * memArr[0] == memArr[1]) {
-
                     list.forEach(node => {
                         if (node.dataset.val == memArr[0] || (node.dataset.val) == (memArr[1])) {
                             node.classList.add('match');
@@ -251,7 +251,7 @@ deck.addEventListener('click', (e) => {
                 }
             }, 400);
         }
-        var flag = 0;
+        let flag = 0;
         setTimeout(() => {
             list.forEach(node => {
                 if (!node.classList.contains('match')) {
@@ -279,6 +279,7 @@ deck.addEventListener('click', (e) => {
                         restart();
                     }
                 });
+                memArr=[];
             };
         }, 500);
     }
